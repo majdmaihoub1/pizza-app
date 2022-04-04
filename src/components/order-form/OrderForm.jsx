@@ -17,9 +17,8 @@ const OrderForm = (total) => {
   const [checked, setChecked] = useState(
     new Array(toppings.length).fill(false)
   );
+  const [toppingsArray, setToppingsArray] = useState({});
   const [toppingsTotal, setToppingsTotal] = useState(0);
-  // const [pizzaTotal, setPizzaTotal] = useState(0);
-
   const handleChange = (event) => {
     setPizzaType(event.target.value);
   };
@@ -36,12 +35,22 @@ const OrderForm = (total) => {
       return sum;
     }, 0);
     setToppingsTotal(toppingsPrice);
+    const toppingsName = updateChange.reduce(
+      (selectedName, currentState, index) => {
+        if (currentState === true) {
+          selectedName = new Array.push(toppings[index].name);
+        }
+        return selectedName;
+      },
+      [{}]
+    );
+    setToppingsArray(toppingsName);
   };
 
   const pizzasprice = pizzaType.price;
   const pizzaTotal = pizzasprice + Number(toppingsTotal);
-  console.log(pizzaType.price);
   total = Number(pizzaTotal) ? pizzaTotal : 0;
+  console.log(toppingsArray);
 
   return (
     <div>
